@@ -6,7 +6,7 @@ versions = yaml['gems']
 
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'spree_travel'
+  s.name        = 'spree_neighbors'
   s.version     = versions['spree_travel']
   s.summary     = 'Spree Travel Neighbors'
   s.description = 'Add neighbors products to a product that have geographic coordinate'

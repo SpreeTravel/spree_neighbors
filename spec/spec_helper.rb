@@ -33,6 +33,7 @@ require 'spree/testing_support/capybara_ext'
 
 # Requires factories defined in lib/spree_neighbors/factories.rb
 require 'spree_neighbors/factories'
+require 'spree_location/factories'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods

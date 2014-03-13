@@ -1,0 +1,9 @@
+<% content_for :page_title do %>
+  <%= t(:spree_neighbors_settings) %>
+<% end %>
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+<ul>
+  <% @collection.each do |locatable| %>
+    <li><%= get_name_from_locatable(locatable)%></li>
+  <% end %>
+</ul>

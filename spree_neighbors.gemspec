@@ -7,7 +7,7 @@ versions = yaml['gems']
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_neighbors'
-  s.version     = versions['spree_travel']
+  s.version     = '0.2'
   s.summary     = 'Spree Travel Neighbors'
   s.description = 'Add neighbors products to a product that have geographic coordinate'
   s.required_ruby_version = '>= 1.9.3'
@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.email     = 'pqr@openjaf.com'
   s.homepage  = 'http://github.com/openjaf/spree_travel'
 
+  s.files        = Dir['LICENSE', 'README.md', 'app/**/*', 'config/**/*', 'lib/**/*', 'db/**/*']
   #s.files       = `git ls-files`.split("\n")
   #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_path = 'lib'
@@ -24,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_core', '~> 2.1.1'
   s.add_dependency 'spree_core', '~> ' + versions['spree']
   s.add_dependency 'spree_auth_devise', '~> ' + versions['spree_auth_devise']
-  s.add_dependency 'spree_location', '= 2.1.1'
+  s.add_dependency 'spree_location', '> 0.7'
 
 
   s.add_development_dependency 'capybara', '~> 2.1'

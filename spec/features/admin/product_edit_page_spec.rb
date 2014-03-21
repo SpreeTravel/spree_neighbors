@@ -19,6 +19,10 @@ describe "Product Page" do
       end
     end
 
-    it 'redirects correctly to the product neighbors view'
+    it 'redirects correctly to the product neighbors view' do
+      visit spree.admin_product_path(product)
+      click_link('Neighbors')
+      expect(page).to have_content('Hello World')
+    end
   end
 end

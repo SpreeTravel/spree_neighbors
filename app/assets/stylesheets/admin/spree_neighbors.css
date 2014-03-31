@@ -1,3 +1,24 @@
 /*
  *= require admin/spree_backend
 */
+.neighbors-number-field{
+  width: 8%;
+  margin: 0px 6px 0px 6px;
+}
+
+#s2id_property_id{
+  margin: 0px 8px 0px 8px;
+}
+
+#property_value{
+  margin: 0px 0px 0px 8px;
+}
+
+.select2-search input{
+  margin-left: 4px;
+  margin-top: 1px !important;
+}
+
+#add_neighbor_button{
+  margin-left: 40px;
+}

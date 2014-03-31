@@ -1,1 +1,47 @@
-<h1>Hello World!!</h1>
+<div class="alpha twelve columns">
+  <%= form_tag(admin_neighbors_settings_path, :method => :put) do %>
+    <fieldset>
+      <legend align="center"><%= t(:show_neighbors_that) %></legend>
+        <div class="row">
+          <%= check_box_tag(:quantity_active) %>
+          <%= label_tag(:quantity_active, t(:show_only)) %>
+          <%= number_field_tag :neighbors_quantity, 0, class: 'neighbors-number-field', :min => 0 %>
+          <%= label_tag(:radius, t(:neighbors)) %>
+        </div>
+        <div class="row">
+          <%= check_box_tag(:radius_active) %>
+          <%= label_tag(:radius_active, t(:neighbors_within)) %>
+          <%= number_field_tag :radius, 0, class: 'neighbors-number-field', :min => 0 %>
+          <%= label_tag(:radius, t(:range)) %>
+        </div>
+        <div class="row">
+          <%= check_box_tag(:properties_active) %>
+          <%= label_tag(:properties_active, t(:neighbors_with_property)) %>
+          <%= select_tag 'property_id', options_for_select(@properties), class: 'select2' %>
+          <%= label_tag(:property_value, t(:with_value)) %>
+          <%= text_field_tag :property_value, ''%>
+        </div>
+        <div id="hidden_fields"></div>
+    </fieldset>
+    <div class="form-buttons filter-actions actions" data-hook="buttons">
+      <%= button Spree.t('actions.update'), 'icon-refresh' %>
+      <span class="or"><%= Spree.t(:or) %></span>
+      <%= link_to_with_icon 'icon-remove', Spree.t('actions.cancel'), collection_url, :class => 'button' %>
+    </div>
+  <% end %>
+
+
+  <fieldset>
+    <legend align="center"><%= t(:add_neighbors) %></legend>
+    <div class="row">
+      <div class="five column">
+        <%= label_tag :neighbor_product, t(:neighbor_product) %>
+        <%= select_tag 'neighbor_product', options_for_select(@locatables), class: 'select2' %>
+        <button class="icon-plus button" name"add_neighbor" id="add_neighbor_button">Add Neighbor</button>
+      </div>
+    </div>
+  </fieldset>
+
+</div>
+
+<%= render :partial => 'spree/admin/neighbors_settings/add_neighbors' %>

@@ -1,7 +1,7 @@
 <script type="text/javascript">
 var locatables_temp = <%= raw(@locatables.to_json) %>;
 var locatables = {};
-var finals = {};
+var finals = [];
 $().ready(function(){
   fix_locatables();
   $('#add_neighbor_button').click(function(){
@@ -9,8 +9,9 @@ $().ready(function(){
     if (selected_item != "") {
       $('#neighbor_product').children().remove(":contains('" + selected_item +"')");
       $('#s2id_neighbor_product .select2-chosen').html("");
-      finals[selected_item] = locatables[selected_item]
+      finals.push(locatables[selected_item]);
       console.log("Added neighbor " + selected_item);
+      update_neighbors();
     };
   });
 });

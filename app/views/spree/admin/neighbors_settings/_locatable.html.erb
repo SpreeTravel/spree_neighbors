@@ -7,6 +7,7 @@
           <%= label_tag(:quantity_active, t(:show_only)) %>
           <%= number_field_tag :neighbors_quantity, 0, class: 'neighbors-number-field', :min => 0 %>
           <%= label_tag(:radius, t(:neighbors)) %>
+          <%= hidden_field_tag(:neighbors_setting_id, @neighbors_settings.id) %>
         </div>
         <div class="row">
           <%= check_box_tag(:radius_active) %>

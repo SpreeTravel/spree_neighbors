@@ -4,6 +4,7 @@ var locatables = {};
 var finals = [];
 $().ready(function(){
   fix_locatables();
+  $('#s2id_neighbor_product .select2-chosen').html("");
   $('#add_neighbor_button').click(function(){
     var selected_item = $('#s2id_neighbor_product .select2-chosen').text();
     if (selected_item != "") {
@@ -14,7 +15,12 @@ $().ready(function(){
       update_neighbors();
     };
   });
+
 });
+
+function clicked (loc_id) {
+  console.log(loc_id);
+}
 
 function update_neighbors(){
   fields = '<input id="neighbors" name="neighbors" type="hidden" value="' + finals + '" />'

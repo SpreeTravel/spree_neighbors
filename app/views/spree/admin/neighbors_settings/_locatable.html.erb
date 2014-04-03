@@ -23,15 +23,13 @@
           <%= text_field_tag :property_value, ''%>
         </div>
         <div id="hidden_fields"></div>
+        <div class="form-buttons filter-actions actions" data-hook="buttons">
+          <%= button Spree.t('actions.update'), 'icon-refresh' %>
+          <span class="or"><%= Spree.t(:or) %></span>
+          <%= link_to_with_icon 'icon-remove', Spree.t('actions.cancel'), collection_url, :class => 'button' %>
+        </div>
     </fieldset>
-    <div class="form-buttons filter-actions actions" data-hook="buttons">
-      <%= button Spree.t('actions.update'), 'icon-refresh' %>
-      <span class="or"><%= Spree.t(:or) %></span>
-      <%= link_to_with_icon 'icon-remove', Spree.t('actions.cancel'), collection_url, :class => 'button' %>
-    </div>
   <% end %>
-
-
   <fieldset>
     <legend align="center"><%= t(:add_neighbors) %></legend>
     <div class="row">
@@ -41,8 +39,35 @@
         <button class="icon-plus button" name"add_neighbor" id="add_neighbor_button">Add Neighbor</button>
       </div>
     </div>
+    <% if @neighbors_locatables.any? %>
+    <table class="index locatables-items" id="listing_locatables">
+      <colgroup>
+         <col style="width: 78%;">
+         <col style="width: 22%;">
+      </colgroup>
+      <thead>
+        <tr data-hook="admin_locatables_index_headers">
+          <th><%= Spree.t(:name) %></th>
+          <th data-hook="admin_locatables_index_header_actions" class="actions"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @neighbors_locatables.each do |locatable| %>
+            <tr id="<%=locatable[1]%>" data-hook="admin_locatables_index_rows" class="<%= cycle('odd', 'even') %>">
+              <td><%= locatable[0] %></td>
+              <td class="actions" data-hook="admin_locatables_index_row_actions">
+                <a class="delete-resource icon_link with-tip icon-trash no-text neighbors_delete_icon" data-action="remove" data-confirm="Are you sure?" href="<%= admin_neighbor_path(locatable[2]) %>">​</a>
+              </td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="no-objects-found">
+      <%= t(:no_neighbors) %>
+    </div>
+  <% end %>
   </fieldset>
-
 </div>
 
 <%= render :partial => 'spree/admin/neighbors_settings/add_neighbors' %>

@@ -3,6 +3,7 @@ Spree::Core::Engine.routes.draw do
     resource :neighbors_settings, only: [:edit, :update] do
       member do
         get :add_neighbor
+        delete :delete_neighbor
       end
     end
 
@@ -12,6 +13,7 @@ Spree::Core::Engine.routes.draw do
         get :neighbors
       end
     end
-    resources :neighbors, only: [:delete]
+
+    resources :neighbors, only: [:destroy]
   end
 end

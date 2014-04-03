@@ -14,3 +14,8 @@ en:
   show_only: "Show only"
   neighbors_with_property: "Show neighbors with property"
   with_value: "With value"
+  successfully_removed_neighbor: "Neighbor successfully removed"
+  fail_remove_neighbor: "Failed to remove Neighbor"
+  successfully_updated_settings: "Succesfully updated Neighbors Settings"
+  fail_updated_settings: "Failed to update Neighbors Settings"
+  no_neighbors: "No Neighbors"

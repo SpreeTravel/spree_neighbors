@@ -7,5 +7,25 @@ $().ready(function(){
       $('#s2id_neighbor_product .select2-chosen').html("");
     };
   });
+
+  var quantity_active = <%= @neighbors_settings.count > 0 ? '1' : '0' %>;
+  var radius_active = <%= @neighbors_settings.radius > 0 ? '1' : '0' %>;
+  var properties_active = <%= @property_selected_value != "" ? '1' : '0' %>;
+
+  if (<%= @property_selected %> == 0) {
+    $('#s2id_property_id .select2-chosen').html("");
+  };
+
+  if (quantity_active == '1') {
+    $('#quantity_active').click();
+  };
+  if (radius_active == '1') {
+    $('#radius_active').click();
+  };
+
+  if (properties_active == '1') {
+    $('#properties_active').click();
+  };
+
 });
 </script>

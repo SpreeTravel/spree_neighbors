@@ -3,24 +3,24 @@
     <fieldset>
       <legend align="center"><%= t(:show_neighbors_that) %></legend>
         <div class="row">
-          <%= check_box_tag(:quantity_active) %>
+          <%= check_box_tag(:quantity_active)%>
           <%= label_tag(:quantity_active, t(:show_only)) %>
-          <%= number_field_tag :neighbors_quantity, 0, class: 'neighbors-number-field', :min => 0 %>
+          <%= number_field_tag :neighbors_quantity, @neighbors_settings.count, class: 'neighbors-number-field', :min => 0 %>
           <%= label_tag(:radius, t(:neighbors)) %>
           <%= hidden_field_tag(:neighbors_setting_id, @neighbors_settings.id) %>
         </div>
         <div class="row">
-          <%= check_box_tag(:radius_active) %>
+          <%= check_box_tag(:radius_active)%>
           <%= label_tag(:radius_active, t(:neighbors_within)) %>
-          <%= number_field_tag :radius, 0, class: 'neighbors-number-field', :min => 0 %>
+          <%= number_field_tag :radius, @neighbors_settings.radius, class: 'neighbors-number-field', :min => 0 %>
           <%= label_tag(:radius, t(:range)) %>
         </div>
         <div class="row">
           <%= check_box_tag(:properties_active) %>
           <%= label_tag(:properties_active, t(:neighbors_with_property)) %>
-          <%= select_tag 'property_id', options_for_select(@properties), class: 'select2' %>
+          <%= select_tag 'property_id', options_for_select(@properties, @property_selected), class: 'select2' %>
           <%= label_tag(:property_value, t(:with_value)) %>
-          <%= text_field_tag :property_value, ''%>
+          <%= text_field_tag :property_value, @property_selected_value%>
         </div>
         <div id="hidden_fields"></div>
         <div class="form-buttons filter-actions actions" data-hook="buttons">

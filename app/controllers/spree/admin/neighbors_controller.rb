@@ -23,6 +23,7 @@ module Spree
           end
         else
           flash[:error] = t(:fail_add_neighbor)
+          redirect_to :back
         end
       end
     end

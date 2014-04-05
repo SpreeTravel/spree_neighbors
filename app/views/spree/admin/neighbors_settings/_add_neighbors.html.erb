@@ -1,38 +1,11 @@
 <script type="text/javascript">
-var locatables_temp = <%= raw(@locatables.to_json) %>;
-var locatables = {};
-var finals = [];
 $().ready(function(){
-  fix_locatables();
   $('#s2id_neighbor_product .select2-chosen').html("");
   $('#add_neighbor_button').click(function(){
-    var selected_item = $('#s2id_neighbor_product .select2-chosen').text();
+    selected_item = $('#s2id_neighbor_product .select2-chosen').text();
     if (selected_item != "") {
-      $('#neighbor_product').children().remove(":contains('" + selected_item +"')");
       $('#s2id_neighbor_product .select2-chosen').html("");
-      finals.push(locatables[selected_item]);
-      console.log("Added neighbor " + selected_item);
-      update_neighbors();
     };
   });
-
 });
-
-function clicked (loc_id) {
-  console.log(loc_id);
-}
-
-function update_neighbors(){
-  fields = '<input id="neighbors" name="neighbors" type="hidden" value="' + finals + '" />'
-  $('#hidden_fields').html(fields);
-}
-
-function fix_locatables () {
-  for (var i = 0; i < locatables_temp.length; i++) {
-    var key = locatables_temp[i][0];
-    var id = locatables_temp[i][1];
-    locatables[key] = id;
-  };
-}
-
 </script>

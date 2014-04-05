@@ -7,6 +7,7 @@ module Spree
       end
 
       def update
+        neighbors_quantity = params[:quantity_active] == '1' ? (Integer(params[:neighbors_quantity]) > 0 ? Integer(params[:neighbors_quantity]) : 0) : 0
         neighbors_setting = Spree::NeighborsSettings.find(params[:neighbors_setting_id])
         radius = params[:radius_active] == '1' ? (Integer(params[:radius]) > 0 ? Integer(params[:radius]) : 0) : 0
 
@@ -16,15 +17,6 @@ module Spree
         neighbors_setting.neighbors_by_property ||= Spree::NeighborsByProperty.new()
         neighbors_setting.neighbors_by_property.property_id = property_id
         neighbors_setting.neighbors_by_property.value = property_value
-
-        unless(params[:neighbors].nil?)
-          neighbors = params[:neighbors].split(",")
-          manual_neighbors = []
-
-          neighbors.each do |locatable|
-            manual_neighbors << (Spree::Neighbors.create(:neighbors_settings_id => neighbors_setting.id, :location_id => locatable))
-          end
-        end
 
         neighbors_setting.radius = radius
         neighbors_setting.neighbors_by_property.save()
@@ -36,14 +28,6 @@ module Spree
         end
 
         redirect_to :back
-      end
-
-      def delete_neighbor
-        print "Pill"
-        print @neighbors_setting
-        print params
-        flash[:success] = "Neighbor successfully removed."
-        render :partial => "spree/admin/shared/destroy"
       end
 
     end

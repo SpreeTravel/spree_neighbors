@@ -14,6 +14,6 @@ Spree::Core::Engine.routes.draw do
       end
     end
 
-    resources :neighbors, only: [:destroy]
+    resources :neighbors, only: [:destroy, :create]
   end
 end

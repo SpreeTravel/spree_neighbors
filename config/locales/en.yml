@@ -19,3 +19,5 @@ en:
   successfully_updated_settings: "Succesfully updated Neighbors Settings"
   fail_updated_settings: "Failed to update Neighbors Settings"
   no_neighbors: "No Neighbors"
+  successfully_added_neighbor: "Neighbor Succesfully added"
+  fail_add_neighbor: "Falied to add neighbor"

@@ -34,16 +34,20 @@
     <legend align="center"><%= t(:add_neighbors) %></legend>
     <div class="row">
       <div class="five column">
-        <%= label_tag :neighbor_product, t(:neighbor_product) %>
-        <%= select_tag 'neighbor_product', options_for_select(@locatables), class: 'select2' %>
-        <button class="icon-plus button" name"add_neighbor" id="add_neighbor_button">Add Neighbor</button>
+        <%= form_tag(admin_neighbors_url, :method => :post, :remote => true) do %>
+          <%= hidden_field_tag(:neighbors_settings_id, @neighbors_settings.id) %>
+          <%= label_tag :neighbor_product, t(:neighbor_product) %>
+          <%= select_tag 'neighbor_product', options_for_select(@locatables), class: 'select2' %>
+          <button class="icon-plus button" name"add_neighbor" id="add_neighbor_button">Add Neighbor</button>
+        <%end%>
       </div>
     </div>
+
     <% if @neighbors_locatables.any? %>
     <table class="index locatables-items" id="listing_locatables">
       <colgroup>
-         <col style="width: 78%;">
-         <col style="width: 22%;">
+         <col style="width: 80%;">
+         <col style="width: 20%;">
       </colgroup>
       <thead>
         <tr data-hook="admin_locatables_index_headers">

@@ -5,5 +5,6 @@ FactoryGirl.define do
   # require 'spree_neighbors/factories'
   factory Spree::NeighborsSettings do |l|
     l.radius 50
+    l.count 10
   end
 end

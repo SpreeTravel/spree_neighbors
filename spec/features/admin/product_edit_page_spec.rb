@@ -36,8 +36,22 @@ describe "Product Page" do
         click_link('Neighbors')
       end
 
+      it 'shows the input to edit the number of neighbors showed' do
+        within '.alpha.twelve.columns' do
+          expect(page).to have_css('#neighbors_quantity')
+        end
+      end
+
       it 'shows the input to edit neighbors radius' do
-        pending('refactoring views')
+        within '.alpha.twelve.columns' do
+          expect(page).to have_css('#radius')
+        end
+      end
+
+      it 'shows the input to edit neighbors_by_property' do
+        within '.alpha.twelve.columns' do
+          expect(page).to have_css('#property_id')
+        end
       end
 
       it 'shows the elements that allows to edit neighbors manually' do

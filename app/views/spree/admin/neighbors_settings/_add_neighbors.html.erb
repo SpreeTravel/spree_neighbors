@@ -1,32 +1,31 @@
 <script type="text/javascript">
-var locatables_temp = <%= raw(@locatables.to_json) %>;
-var locatables = {};
-var finals = [];
 $().ready(function(){
-  fix_locatables();
+  $('#s2id_neighbor_product .select2-chosen').html("");
   $('#add_neighbor_button').click(function(){
-    var selected_item = $('#s2id_neighbor_product .select2-chosen').text();
+    selected_item = $('#s2id_neighbor_product .select2-chosen').text();
     if (selected_item != "") {
-      $('#neighbor_product').children().remove(":contains('" + selected_item +"')");
       $('#s2id_neighbor_product .select2-chosen').html("");
-      finals.push(locatables[selected_item]);
-      console.log("Added neighbor " + selected_item);
-      update_neighbors();
     };
   });
-});
 
-function update_neighbors(){
-  fields = '<input id="neighbors" name="neighbors" type="hidden" value="' + finals + '" />'
-  $('#hidden_fields').html(fields);
-}
+  var quantity_active = <%= @neighbors_settings.count > 0 ? '1' : '0' %>;
+  var radius_active = <%= @neighbors_settings.radius > 0 ? '1' : '0' %>;
+  var properties_active = <%= @property_selected_value != "" ? '1' : '0' %>;
 
-function fix_locatables () {
-  for (var i = 0; i < locatables_temp.length; i++) {
-    var key = locatables_temp[i][0];
-    var id = locatables_temp[i][1];
-    locatables[key] = id;
+  if (<%= @property_selected %> == 0) {
+    $('#s2id_property_id .select2-chosen').html("");
   };
-}
 
+  if (quantity_active == '1') {
+    $('#quantity_active').click();
+  };
+  if (radius_active == '1') {
+    $('#radius_active').click();
+  };
+
+  if (properties_active == '1') {
+    $('#properties_active').click();
+  };
+
+});
 </script>

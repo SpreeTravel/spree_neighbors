@@ -22,6 +22,11 @@
           <%= label_tag(:property_value, t(:with_value)) %>
           <%= text_field_tag :property_value, @property_selected_value%>
         </div>
+        <div class="row">
+          <%= check_box_tag(:sorting_active) %>
+          <%= label_tag(:sorting_active, t(:sort_neighbors_by)) %>
+          <%= select_tag 'sort', options_for_select(@sorting_options, @sorting_selected), class: 'select2' %>
+        </div>
         <div id="hidden_fields"></div>
         <div class="form-buttons filter-actions actions" data-hook="buttons">
           <%= button Spree.t('actions.update'), 'icon-refresh' %>
@@ -73,5 +78,7 @@
   <% end %>
   </fieldset>
 </div>
+
+<%= neighbors_map(@neighbors_settings.location.locatable) %>
 
 <%= render :partial => 'spree/admin/neighbors_settings/add_neighbors' %>

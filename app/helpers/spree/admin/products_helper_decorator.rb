@@ -11,7 +11,7 @@ Spree::ProductsHelper.module_eval do
       neighbors_ids = Spree::Neighbors.where(neighbors_settings_id: neighbors_settings.id).map { |neighbor| neighbor.location_id}
       nearby_items = neighbors_settings.radius > 0 ? Spree::Location.where(locatable_type: item.locatable_type).where.not(id: item.id).where.not(id: neighbors_ids).near([item.latitude, item.longitude], neighbors_settings.radius).map { |locatable| {:latitude => locatable.latitude, :longitude => locatable.longitude, :distance => item.distance_from([locatable.latitude, locatable.longitude]), :locatable_id => locatable.id } } : []
       neighbors = Spree::Neighbors.where(neighbors_settings_id: neighbors_settings.id).map { |neighbor| {:latitude => neighbor.location.latitude, :longitude => neighbor.location.longitude, :distance => item.distance_from([neighbor.location.latitude, neighbor.location.longitude]), :locatable_id => neighbor.location.id } }
-      products_prop = neighbors_settings.neighbors_by_property.nil? ? [] : neighbors_settings.neighbors_by_property.value == "" ? [] : Spree::ProductProperty.where(property_id: item.neighbors_by_property.property_id, value: item.neighbors_by_property.value).map{ |product_prop| product_prop.product }
+      products_prop = neighbors_settings.neighbors_by_property.nil? ? [] : neighbors_settings.neighbors_by_property.value == "" ? [] : Spree::ProductProperty.where(property_id: neighbors_settings.neighbors_by_property.property_id, value: neighbors_settings.neighbors_by_property.value).map{ |product_prop| product_prop.product }
       neighbors_by_prop = []
       products_prop.each do |prod|
         unless prod.location.nil?
@@ -20,26 +20,26 @@ Spree::ProductsHelper.module_eval do
       end
     end
 
-    result = nearby_items + neighbors + neighbors_by_prop
+    union = nearby_items | neighbors | neighbors_by_prop
 
     #The sorting bussiness goes here
 
     case neighbors_settings.sort
     when 2
-      sorted = result.sort_by { |item| item[Spree::Location.find(item[:locatable_id]).locatable.name] }
+      sorted = union.sort_by { |neighbor| Spree::Location.find(neighbor[:locatable_id]).locatable.name }
     when 1
-      sorted = result.sort_by { |item| item[:distance] }
+      sorted = union.sort_by { |neighbor| neighbor[:distance] }
     else
-      sorted = result
+      sorted = union
     end
 
-    final_result = sorted
+    result = sorted
 
     if neighbors_settings.count > 0
       #it does'nt matter if the count is bigger than the amount of items it gets them all
-      final_result = sorted.take(neighbors_settings.count)
+      result = sorted.take(neighbors_settings.count)
     end
 
-    final_result
+    result
   end
 end

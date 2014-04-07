@@ -6,6 +6,7 @@ Spree::ProductsHelper.module_eval do
 
   def get_neighbors_pins_coordinates(item)
     neighbors_settings = item.neighbors_settings
+
     unless neighbors_settings.nil?
       neighbors_ids = Spree::Neighbors.where(neighbors_settings_id: neighbors_settings.id).map { |neighbor| neighbor.location_id}
       nearby_items = neighbors_settings.radius > 0 ? Spree::Location.where(locatable_type: item.locatable_type).where.not(id: item.id).where.not(id: neighbors_ids).near([item.latitude, item.longitude], neighbors_settings.radius).map { |locatable| {:latitude => locatable.latitude, :longitude => locatable.longitude, :distance => item.distance_from([locatable.latitude, locatable.longitude]), :locatable_id => locatable.id } } : []
@@ -18,10 +19,17 @@ Spree::ProductsHelper.module_eval do
         end
       end
     end
+
     #The sorting bussiness goes here
     result = nearby_items + neighbors + neighbors_by_prop
     sorted = result.sort_by { |item| item[:distance] }
+    final_result = sorted
 
-    sorted
+    if neighbors_settings.count > 0
+      #it does'nt matter if the count is bigger than the amount of items it gets them all
+      final_result = sorted.take(neighbors_settings.count)
+    end
+
+    final_result
   end
 end

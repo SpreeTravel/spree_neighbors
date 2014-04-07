@@ -6,7 +6,7 @@ Spree::ProductsHelper.module_eval do
 
   def get_neighbors_pins_coordinates(item)
     neighbors_settings = item.neighbors_settings
-
+    result = []
     unless neighbors_settings.nil?
       neighbors_ids = Spree::Neighbors.where(neighbors_settings_id: neighbors_settings.id).map { |neighbor| neighbor.location_id}
       nearby_items = neighbors_settings.radius > 0 ? Spree::Location.where(locatable_type: item.locatable_type).where.not(id: item.id).where.not(id: neighbors_ids).near([item.latitude, item.longitude], neighbors_settings.radius).map { |locatable| {:latitude => locatable.latitude, :longitude => locatable.longitude, :distance => item.distance_from([locatable.latitude, locatable.longitude]), :locatable_id => locatable.id } } : []
@@ -18,40 +18,50 @@ Spree::ProductsHelper.module_eval do
           neighbors_by_prop << {:latitude => prod.location.latitude, :longitude => prod.location.longitude, :distance => item.distance_from([prod.location.latitude, prod.location.longitude]), :locatable_id => prod.location.id }
         end
       end
-    end
+      union = nearby_items | neighbors | neighbors_by_prop
 
-    union = nearby_items | neighbors | neighbors_by_prop
+      #The sorting bussiness goes here
 
-    #The sorting bussiness goes here
+      case neighbors_settings.sort
+      when 2
+        sorted = union.sort_by { |neighbor| Spree::Location.find(neighbor[:locatable_id]).locatable.name }
+      when 1
+        sorted = union.sort_by { |neighbor| neighbor[:distance] }
+      else
+        sorted = union
+      end
 
-    case neighbors_settings.sort
-    when 2
-      sorted = union.sort_by { |neighbor| Spree::Location.find(neighbor[:locatable_id]).locatable.name }
-    when 1
-      sorted = union.sort_by { |neighbor| neighbor[:distance] }
-    else
-      sorted = union
-    end
+      result = sorted
 
-    result = sorted
-
-    if neighbors_settings.count > 0
-      #it does'nt matter if the count is bigger than the amount of items it gets them all
-      result = sorted.take(neighbors_settings.count)
+      if neighbors_settings.count > 0
+        #it does'nt matter if the count is bigger than the amount of items it gets them all
+        result = sorted.take(neighbors_settings.count)
+      end
     end
 
     result
   end
 
   def neighbors_map(product)
+    products = []
+    products << product
     unless product.location.nil?
       neighbors = get_neighbors_pins_coordinates(product.location)
-      products = []
-      products << product
       neighbors.each do |location|
         products << Spree::Location.find(location[:locatable_id]).locatable
       end
-      products_map(products)
     end
+    products_map(products)
+  end
+
+  def provide_products(product)
+    products = []
+    unless product.location.nil?
+      neighbors = get_neighbors_pins_coordinates(product.location)
+      neighbors.each do |location|
+        products << Spree::Location.find(location[:locatable_id]).locatable
+      end
+    end
+    products
   end
 end

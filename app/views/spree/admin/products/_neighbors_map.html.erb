@@ -1,4 +1,9 @@
 <div data-hook="neighbors_map" id="neighbors_map">
- <h6 class="product-section-title"><%= t(:map) %></h6>
- <%= neighbors_map( @product || product) %>
+  <h6 class="product-section-title"><%= t(:map) %></h6>
+  <%= neighbors_map( @product || product) %>
+  <ul id="neighbors-list">
+    <%provide_products(@product).each do |neighbor| %>
+      <li><%= link_to neighbor.try(:name), product_path(neighbor) %></li>
+    <%end%>
+  </ul>
 </div>

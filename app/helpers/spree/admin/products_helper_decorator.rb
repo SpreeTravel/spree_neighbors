@@ -20,9 +20,19 @@ Spree::ProductsHelper.module_eval do
       end
     end
 
-    #The sorting bussiness goes here
     result = nearby_items + neighbors + neighbors_by_prop
-    sorted = result.sort_by { |item| item[:distance] }
+
+    #The sorting bussiness goes here
+
+    case neighbors_settings.sort
+    when 2
+      sorted = result.sort_by { |item| item[Spree::Location.find(item[:locatable_id]).locatable.name] }
+    when 1
+      sorted = result.sort_by { |item| item[:distance] }
+    else
+      sorted = result
+    end
+
     final_result = sorted
 
     if neighbors_settings.count > 0

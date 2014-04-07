@@ -8,6 +8,7 @@ module Spree
 
       def update
         neighbors_quantity = params[:quantity_active] == '1' ? (Integer(params[:neighbors_quantity]) > 0 ? Integer(params[:neighbors_quantity]) : 0) : 0
+        neighbors_sorting = params[:sorting_active] == '1' ? (Integer(params[:sort]) > 0 ? Integer(params[:sort]) : 0) : 0
         neighbors_setting = Spree::NeighborsSettings.find(params[:neighbors_setting_id])
         radius = params[:radius_active] == '1' ? (Float(params[:radius]) > 0 ? Float(params[:radius]) : 0) : 0
 
@@ -20,6 +21,7 @@ module Spree
 
         neighbors_setting.radius = radius
         neighbors_setting.count = neighbors_quantity
+        neighbors_setting.sort = neighbors_sorting
         neighbors_setting.neighbors_by_property.save()
 
         if neighbors_setting.save()

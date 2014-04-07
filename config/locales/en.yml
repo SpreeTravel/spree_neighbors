@@ -21,3 +21,4 @@ en:
   no_neighbors: "No Neighbors"
   successfully_added_neighbor: "Neighbor Succesfully added"
   fail_add_neighbor: "Falied to add neighbor"
+  sort_neighbors_by: "Sort Neighbors"

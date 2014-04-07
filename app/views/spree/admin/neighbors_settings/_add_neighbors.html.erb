@@ -10,6 +10,7 @@ $().ready(function(){
 
   var quantity_active = <%= @neighbors_settings.count > 0 ? '1' : '0' %>;
   var radius_active = <%= @neighbors_settings.radius > 0 ? '1' : '0' %>;
+  var sorting_active = <%= @neighbors_settings.sort > 0 ? '1' : '0' %>;
   var properties_active = <%= @property_selected_value != "" ? '1' : '0' %>;
 
   if (<%= @property_selected %> == 0) {
@@ -25,6 +26,10 @@ $().ready(function(){
 
   if (properties_active == '1') {
     $('#properties_active').click();
+  };
+
+    if (sorting_active == '1') {
+    $('#sorting_active').click();
   };
 
 });

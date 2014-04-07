@@ -8,6 +8,7 @@ Spree::Admin::ProductsController.class_eval do
     @neighbors_locatables = Spree::Neighbors.where(neighbors_settings_id: @neighbors_settings.id).map { |neighbor| [Spree::Location.find(neighbor.location_id).locatable.name, neighbor.location_id, neighbor]}
     @properties = Spree::Property.all.map{|property| [property.name, property.id]}
     @sorting_options = [['By Distance', 1], ['By Name', 2]]
+    @sorting_selected = @neighbors_settings.sort
     @property_selected = @neighbors_settings.neighbors_by_property.nil? ? -1 : @neighbors_settings.neighbors_by_property.property_id
     @property_selected_value = @neighbors_settings.neighbors_by_property.nil? ? "" : @neighbors_settings.neighbors_by_property.value
   end

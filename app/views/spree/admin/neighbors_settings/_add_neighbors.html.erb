@@ -17,6 +17,10 @@ $().ready(function(){
     $('#s2id_property_id .select2-chosen').html("");
   };
 
+  if (<%= @sorting_selected %> == 0) {
+    $('#s2id_sort .select2-chosen').html("");
+  };
+
   if (quantity_active == '1') {
     $('#quantity_active').click();
   };
@@ -28,7 +32,7 @@ $().ready(function(){
     $('#properties_active').click();
   };
 
-    if (sorting_active == '1') {
+  if (sorting_active == '1') {
     $('#sorting_active').click();
   };
 

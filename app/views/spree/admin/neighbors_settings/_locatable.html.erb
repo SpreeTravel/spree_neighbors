@@ -25,7 +25,7 @@
         <div class="row">
           <%= check_box_tag(:sorting_active) %>
           <%= label_tag(:sorting_active, t(:sort_neighbors_by)) %>
-          <%= select_tag 'sort', options_for_select(@sorting_options, @property_selected), class: 'select2' %>
+          <%= select_tag 'sort', options_for_select(@sorting_options, @sorting_selected), class: 'select2' %>
         </div>
         <div id="hidden_fields"></div>
         <div class="form-buttons filter-actions actions" data-hook="buttons">

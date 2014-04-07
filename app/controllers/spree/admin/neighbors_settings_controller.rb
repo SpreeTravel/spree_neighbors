@@ -21,7 +21,7 @@ module Spree
 
         neighbors_setting.radius = radius
         neighbors_setting.count = neighbors_quantity
-        eighbors_setting.sort = neighbors_sorting
+        neighbors_setting.sort = neighbors_sorting
         neighbors_setting.neighbors_by_property.save()
 
         if neighbors_setting.save()

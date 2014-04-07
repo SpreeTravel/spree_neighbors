@@ -10,19 +10,13 @@ module Spree
         item.neighbors_settings = item.neighbors_settings || Spree::NeighborsSettings.create(:location_id => item.id)
       end
 
-      def get_property_from_neighbors_settings(neighbors_settings)
-        if neighbors_settings.neighbors_by_property.nil?
-          -1
-        else
-          neighbors_settings.neighbors_by_property.property_id
-        end
-      end
-
-      def get_property_value_from_neighbors_settings(neighbors_settings)
-        if neighbors_settings.neighbors_by_property.nil?
-          ""
-        else
-          neighbors_settings.neighbors_by_property.value
+      def get_neighbors_pins_coordinates(item)
+        neighbors_settings = item.neighbors_settings
+        unless neighbors_settings.nil?
+          neighbors_ids = Spree::Neighbors.where(neighbors_settings_id: neighbors_settings.id).map { |neighbor| neighbor.location_id}
+          nearby_items = Spree::Location.where.(locatable_type: item.locatable_type).where.not(id: item.id).where.not(id: neighbors_ids).near([item.latitude, item.longitude], neighbors_settings.radius).map { |locatable| {:latitude => locatable.latitude, :longitude => locatable.longitude, :distance => item.distance_from([locatable.latitude, locatable.longitude]) } }
+          neighbors = Spree::Neighbors.where(neighbors_settings_id: neighbors_settings.id).map { |neighbor| {:latitude => neighbor.location.latitude, :longitude => neighbor.location.longitude, :distance => item.distance_from([neighbor.location.latitude, neighbor.location.longitude]) }}
+          raise "Pill"
         end
       end
 

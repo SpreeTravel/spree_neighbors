@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_core', '~> ' + versions['spree']
   s.add_dependency 'spree_auth_devise', '~> ' + versions['spree_auth_devise']
   s.add_dependency 'spree_location', '> 0.7'
+  s.add_dependency 'geocoder', '1.1.9'
 
 
   s.add_development_dependency 'capybara', '~> 2.1'

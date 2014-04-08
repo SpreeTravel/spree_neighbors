@@ -8,7 +8,6 @@ describe "Product Page" do
     let!(:productlocation) {FactoryGirl.create(Spree::Location)}
     let!(:product) {create(:product, :name => 'apache baseball cap', :price => 10, :location => productlocation)}
 
-
     context 'on the product edit view' do
       before(:each) do
         visit spree.admin_product_path(product)

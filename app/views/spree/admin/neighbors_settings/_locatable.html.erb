@@ -82,7 +82,7 @@
 <%= neighbors_map(@neighbors_settings.location.locatable) %>
 <ul id="neighbors-list">
 <%provide_products(@neighbors_settings.location.locatable).each do |neighbor| %>
-<li><%= link_to neighbor.try(:name), product_path(neighbor) %></li>
+  <li><%= link_to neighbor.try(:name), product_path(neighbor) %></li>
 <%end%>
 </ul>
 

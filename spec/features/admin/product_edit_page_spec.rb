@@ -53,8 +53,18 @@ describe "Product Page" do
         end
       end
 
+      it 'shows the input to edit neighbors sorting option' do
+        within '.alpha.twelve.columns' do
+          expect(page).to have_css('#sort')
+        end
+      end
+
       it 'shows the elements that allows to edit neighbors manually' do
-        pending('Not to sure on how to do it')
+        within '.alpha.twelve.columns' do
+          within '.row.five.column' do
+            expect(page).to have_css('#neighbor_product')
+          end
+        end
       end
 
     end

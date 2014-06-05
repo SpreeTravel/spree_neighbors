@@ -22,9 +22,9 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 2.1.1'
-  s.add_dependency 'spree_core', '~> ' + versions['spree']
-  s.add_dependency 'spree_auth_devise', '~> ' + versions['spree_auth_devise']
+  s.add_dependency 'spree_core', '>= 2.1.1'
+  s.add_dependency 'spree_core', '>= ' + versions['spree']
+  s.add_dependency 'spree_auth_devise', '>= ' + versions['spree_auth_devise']
   s.add_dependency 'spree_location', '> 0.7'
   s.add_dependency 'geocoder', '1.1.9'
 

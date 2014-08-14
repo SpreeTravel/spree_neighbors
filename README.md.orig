@@ -1,0 +1,77 @@
+SpreeNeighbors
+==============
+
+<<<<<<< HEAD
+Relaciona productos cercanos a un producto.
+
+- depende de spree_location
+
+- define relacion neighbor (i_am_close_to_this_product)
+
+- modifica vista show para mostrar los vecino diferenciandolos del propio producto.
+
+- en la vista admin se pueden configurar varias cosas (especificar bien)
+
+	define el métodos [productos_cercanos (nearest)]
+
+	por defecto devuelve los productos relacionados con la relación i_am_related_to_this_product
+
+	los herederos lo pueden sobreescribir
+
+Spree::Config
+
+	how_many_near_products
+
+	max_distance_in_map
+
+	show_nearest_or_related (con las relaciones)
+	en la interfaz de admin permite configurar estas cosas.
+
+=======
+Introduction goes here.
+>>>>>>> dustet/master
+
+Installation
+------------
+
+Add spree_neighbors to your Gemfile:
+
+```ruby
+gem 'spree_neighbors'
+```
+
+Bundle your dependencies and run the installation generator:
+
+```shell
+bundle
+bundle exec rails g spree_neighbors:install
+```
+
+<<<<<<< HEAD
+Copy migrations from spree_neighbors to application:
+
+```shell
+bundle exec rake spree_neighbors:install:migrations
+```
+
+=======
+Testing
+-------
+
+Be sure to bundle your dependencies and then create a dummy test app for the specs to run against.
+
+```shell
+bundle
+bundle exec rake test_app
+bundle exec rspec spec
+```
+
+When testing your applications integration with this extension you may use it's factories.
+Simply add this require statement to your spec_helper:
+
+```ruby
+require 'spree_neighbors/factories'
+```
+
+Copyright (c) 2014 [name of extension creator], released under the New BSD License
+>>>>>>> dustet/master

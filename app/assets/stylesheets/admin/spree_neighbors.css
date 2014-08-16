@@ -1,5 +1,5 @@
 /*
- *= require admin/spree_backend
+ *= require spree/backend
 */
 .neighbors-number-field{
   width: 10%;
@@ -21,4 +21,12 @@
 
 #add_neighbor_button{
   margin-left: 40px;
+}
+
+#neighbors-list{
+  list-style-type: none;
+}
+
+#neighbors-list li{
+  margin: 2px;
 }

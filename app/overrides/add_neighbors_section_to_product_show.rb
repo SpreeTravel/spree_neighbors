@@ -1,7 +1,7 @@
 Deface::Override.new(
-  :virtual_path => "spree/admin/products/_form",
-  :name => "add_location_to_admin_product_form",
-  :insert_top => '[data-hook="product_map"]',
+  :virtual_path => "spree/products/show",
+  :name => "add_neighbors_section_to_product_show",
+  :insert_after => '[data-hook="product_left_part_wrap"]',
   :partial => "spree/admin/products/neighbors_map",
   :disabled => false
 )

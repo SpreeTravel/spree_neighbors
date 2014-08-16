@@ -10,4 +10,7 @@ describe Spree::NeighborsSettings do
   it 'validates count correctly' do
     FactoryGirl.build(Spree::NeighborsSettings, count: -1).should_not be_valid
   end
+  it 'validates sorting correctly' do
+    FactoryGirl.build(Spree::NeighborsSettings, sort: -1).should_not be_valid
+  end
 end

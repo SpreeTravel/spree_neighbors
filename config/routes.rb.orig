@@ -1,9 +1,0 @@
-Spree::Core::Engine.routes.draw do
-<<<<<<< HEAD
-  # Add your extension routes here
-=======
-  namespace :admin do
-    resource :neighbors_settings
-  end
->>>>>>> dustet/master
-end

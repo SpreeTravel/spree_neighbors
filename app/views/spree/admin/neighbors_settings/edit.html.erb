@@ -2,8 +2,32 @@
   <%= t(:spree_neighbors_settings) %>
 <% end %>
 <%= render :partial => 'spree/admin/shared/configuration_menu' %>
-<ul>
-  <% @collection.each do |locatable| %>
-    <li><%= get_name_from_locatable(locatable)%></li>
-  <% end %>
-</ul>
+
+<% if @collection.any? %>
+  <table class="index locatables-items" id="listing_locatables">
+    <colgroup>
+       <col style="width: 78%;">
+       <col style="width: 22%;">
+    </colgroup>
+    <thead>
+      <tr data-hook="admin_locatables_index_headers">
+        <th><%= Spree.t(:name) %></th>
+        <th data-hook="admin_locatables_index_header_actions" class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @collection.each do |locatable| %>
+          <tr id="<%= spree_dom_id locatable %>" data-hook="admin_locatables_index_rows" class="<%= cycle('odd', 'even') %>">
+            <td><%= get_name_from_locatable(locatable)%></td>
+            <td class="actions" data-hook="admin_locatables_index_row_actions">
+              <%= link_to_edit_url edit_admin_neighbors_settings_url, :no_text => true, :class => 'edit' %>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="no-objects-found">
+    <%= Spree.t(:no_results) %>
+  </div>
+<% end %>

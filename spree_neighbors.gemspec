@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.authors   = ['Pedro Quintero', 'Miguel Sancho', 'Cesar Lage', 'Raul Perez-alejo']
   s.email     = 'pqr@openjaf.com'
-  s.homepage  = 'http://github.com/openjaf/spree_travel'
+  s.homepage  = 'http://github.com/openjaf/spree_neighbors'
 
   s.files        = Dir['LICENSE', 'README.md', 'app/**/*', 'config/**/*', 'lib/**/*', 'db/**/*']
   #s.files       = `git ls-files`.split("\n")
@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '>= 2.1.1'
   s.add_dependency 'spree_core', '>= ' + versions['spree']
   s.add_dependency 'spree_auth_devise', '>= ' + versions['spree_auth_devise']
   s.add_dependency 'spree_location', '> 0.7'

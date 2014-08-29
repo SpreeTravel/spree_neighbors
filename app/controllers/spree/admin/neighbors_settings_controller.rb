@@ -3,7 +3,13 @@ module Spree
     class NeighborsSettingsController < Spree::Admin::BaseController
 
       def edit
-        @collection = Spree::Location.where(:locatable_id => Spree::Product.all.pluck(:id)).includes(:locatable => :translations)
+        page   = params[:page] || 1
+        per    = params[:per] || Spree::Config[:admin_products_per_page]
+        offset = (page - 1 ) * per
+        limit  = per
+        @collection = Spree::Location.includes(:locatable => :translations)
+        @collection = @collection.where(:locatable_id => Spree::Product.all.pluck(:id))
+        @collection = @collection.offset(offset).limit(limit)
       end
 
       def update

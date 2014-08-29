@@ -3,7 +3,7 @@ module Spree
     class NeighborsSettingsController < Spree::Admin::BaseController
 
       def edit
-        @collection = Spree::Location.where(:locatable_id => Spree::Product.all.pluck(:id))
+        @collection = Spree::Location.where(:locatable_id => Spree::Product.all.pluck(:id)).includes(:locatable => :translations)
       end
 
       def update

@@ -7,6 +7,7 @@ Spree::Admin::ProductsController.class_eval do
     @neighbors_settings = locatable.neighbors_settings = locatable.neighbors_settings || default_neighbors_settings
     neighbor_location_ids = Spree::Neighbors.where(neighbors_settings_id: @neighbors_settings.id).pluck(:location_id)
     locatables = Spree::Location.where(locatable_type: 'Spree::Product')
+    locatables = locatables.includes(:locatable => :translations)
     locatables = locatables.where.not(locatable_id: @product.id)
     locatables = locatables.where.not(id: neighbor_location_ids)
     locatables = locatables.find_all {|l| l.locatable }

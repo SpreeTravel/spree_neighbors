@@ -9,7 +9,8 @@ module Spree
         limit  = per
         @collection = Spree::Location.includes(:locatable => :translations)
         @collection = @collection.where(:locatable_id => Spree::Product.all.pluck(:id))
-        @collection = @collection.offset(offset).limit(limit)
+        #@collection = @collection.offset(offset).limit(limit)
+        @collection = @collection.page(page).per(per)
       end
 
       def update

@@ -9,7 +9,7 @@ Spree::ProductsHelper.module_eval do
     by_distance = item.neighbors_ids_by_distance
     by_choice = item.neighbors_ids_by_choice
     by_property = item.neighbors_ids_by_property
-    union = by_choise
+    union = by_choice
     if by_property
       union = union | by_distance & by_property
     else

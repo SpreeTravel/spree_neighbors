@@ -51,6 +51,7 @@ Spree::ProductsHelper.module_eval do
     products = []
     unless product.location.nil?
       neighbors = get_neighbors_pins_coordinates(product.location)
+    ble
       neighbors.each do |location|
         products << Spree::Location.find(location[:locatable_id]).locatable
       end

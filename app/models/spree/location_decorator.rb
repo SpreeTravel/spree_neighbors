@@ -30,6 +30,7 @@ Spree::Location.class_eval do
     settings = self.neighbors_settings
     return nil if settings.nil?
     return nil if settings.neighbors_by_property.nil?
+    return nil if settings.neighbors_by_property.property_id == 0
     pp = Spree::ProductProperty.where(property_id: settings.neighbors_by_property.property_id)
     pp = pp.where(value: settings.neighbors_by_property.value) if settings.neighbors_by_property.value.present?
     neighbors_ids = pp.map { |p| p.product.location.id rescue nil }.compact

@@ -15,7 +15,7 @@ Spree::Admin::ProductsController.class_eval do
     neighbors_locatables = Spree::Neighbors.where(neighbors_settings_id: @neighbors_settings.id)
     neighbors_locatables = neighbors_locatables.includes([{:location => {:locatable => :translations}}])
     @neighbors_locatables = neighbors_locatables.map { |neighbor| [neighbor.location.locatable.name, neighbor.location_id, neighbor]}
-    @properties = Spree::Property.all.map{|property| [property.name, property.id]}
+    @properties = Spree::Property.includes(:translations).map{|property| [property.name, property.id]}
     @sorting_options = [['By Distance', 1], ['By Name', 2]]
     @sorting_selected = @neighbors_settings.sort
     @property_selected = @neighbors_settings.neighbors_by_property.nil? ? -1 : @neighbors_settings.neighbors_by_property.property_id

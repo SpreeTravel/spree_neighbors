@@ -18,18 +18,19 @@ Spree::ProductsHelper.module_eval do
     list = Spree::Location.where(:id => union).to_a.compact.map do |location|
       {
         :latitude => location.latitude,
-        :longitude => neighbor.location.longitude,
+        :longitude => location.longitude,
         :distance => item.distance_from([location.latitude, location.longitude]),
         :locatable_id => location.id
       }
     end
 
-    case neighbors_settings.sort
-    when 2 then sorted = list.sort_by { |neighbor| Spree::Location.find(neighbor[:locatable_id]).locatable.name }
-    when 1 then sorted = list.sort_by { |neighbor| neighbor[:distance] }
-    else sorted = list
+    sorted = list
+    if item.neighbors_settings
+      case item.neighbors_settings.sort
+        when 2 then sorted = list.sort_by { |neighbor| Spree::Location.find(neighbor[:locatable_id]).locatable.name }
+        when 1 then sorted = list.sort_by { |neighbor| neighbor[:distance] }
+      end
     end
-
     sorted = sorted[0,neighbors_settings.count] if neighbors_settings.count > 0
     sorted
   end

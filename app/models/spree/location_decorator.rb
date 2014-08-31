@@ -13,7 +13,7 @@ Spree::Location.class_eval do
     nearby_items = nearby_items.where.not(id: self.id)
     nearby_items = nearby_items.near([self.latitude, self.longitude], settings.radius)
     #nearby_items = nearby_items.limit(settings.count)
-    nearby_items = nearby_items.pluck(:id)
+    nearby_items = nearby_items.map(&:id)
     nearby_items
   end
 

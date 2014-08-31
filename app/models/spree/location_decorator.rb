@@ -17,7 +17,7 @@ Spree::Location.class_eval do
     nearby_items
   end
 
-  def neighbors_ids_by_choise
+  def neighbors_ids_by_choice
     settings = self.neighbors_settings
     return [] if settings.nil?
     neighbors_ids = Spree::Neighbors.where(neighbors_settings_id: settings.id)

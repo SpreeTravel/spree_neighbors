@@ -15,7 +15,7 @@ Spree::ProductsHelper.module_eval do
     else
       union = union | by_distance
     end
-    list = Spree::Location.where(:id => union).compact.map do |location|
+    list = Spree::Location.where(:id => union).to_a.compact.map do |location|
       {
         :latitude => location.latitude,
         :longitude => neighbor.location.longitude,

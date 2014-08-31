@@ -31,7 +31,7 @@ Spree::ProductsHelper.module_eval do
         when 1 then sorted = list.sort_by { |neighbor| neighbor[:distance] }
       end
     end
-    sorted = sorted[0,neighbors_settings.count] if neighbors_settings.count > 0
+    sorted = sorted[0,item.neighbors_settings.count] if item.neighbors_settings.count > 0
     sorted
   end
 

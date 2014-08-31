@@ -15,8 +15,11 @@ Spree::ProductsHelper.module_eval do
     else
       union = union | by_distance
     end
-    list = Spree::Location.where(:id => union).to_a.compact.map do |location|
-      {
+    list = []
+    Spree::Location.where(:id => union).each do |location|
+      product = location.locatable
+      next if product.nil?
+      list << {
         :latitude => location.latitude,
         :longitude => location.longitude,
         :distance => item.distance_from([location.latitude, location.longitude]),
@@ -51,7 +54,6 @@ Spree::ProductsHelper.module_eval do
     products = []
     unless product.location.nil?
       neighbors = get_neighbors_pins_coordinates(product.location)
-    ble
       neighbors.each do |location|
         products << Spree::Location.find(location[:locatable_id]).locatable
       end

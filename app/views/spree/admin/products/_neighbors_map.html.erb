@@ -1,13 +1,11 @@
-<%if not(@product.location.nil?)%>
-  <%if @product.location.latitude != 0 %>
-    <div data-hook="neighbors_map" id="neighbors_map">
-      <h6 class="product-section-title"><%= t(:neighbors) %></h6>
-      <%= neighbors_map( @product || product) %>
-      <ul id="neighbors-list">
-        <%provide_products(@product).each do |neighbor| %>
-          <li><%= link_to neighbor.try(:name), product_path(neighbor) %></li>
-        <%end%>
-      </ul>
-    </div>
-  <%end%>
+<%if @product.location %>
+  <div data-hook="neighbors_map" id="neighbors_map">
+    <h6 class="product-section-title"><%= t(:map) %></h6>
+    <%= neighbors_map( @product || product) %>
+    <ul id="neighbors-list">
+      <% provide_products(@product).each do |neighbor| %>
+        <li><%= link_to neighbor.try(:name), product_path(neighbor) %></li>
+      <%end%>
+    </ul>
+  </div>
 <%end%>

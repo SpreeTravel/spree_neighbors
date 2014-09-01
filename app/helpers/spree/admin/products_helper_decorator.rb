@@ -50,7 +50,7 @@ Spree::ProductsHelper.module_eval do
     products_map(products)
   end
 
-  def provide_products(product)
+  def products_neighbors(product)
     products = []
     unless product.location.nil?
       neighbors = get_neighbors_pins_coordinates(product.location)
@@ -59,5 +59,9 @@ Spree::ProductsHelper.module_eval do
       end
     end
     products
+  end
+
+  def format_distance(number)
+    "%0.2f Km" % number
   end
 end

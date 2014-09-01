@@ -4,6 +4,13 @@ Spree::Location.class_eval do
   #Fields for the geocoder gem
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
+  after_save :set_default_neighbors_settings
+
+  def sef_default_neighbors_settings
+    unless self.neighbors_settings
+      Spree::NeighborsSettings.create_settings_for(self)
+    end
+  end
 
   def neighbors_ids_by_distance
     settings = self.neighbors_settings

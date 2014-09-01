@@ -6,7 +6,7 @@ Spree::Location.class_eval do
   after_validation :reverse_geocode
   after_save :set_default_neighbors_settings
 
-  def sef_default_neighbors_settings
+  def set_default_neighbors_settings
     unless self.neighbors_settings
       Spree::NeighborsSettings.create_settings_for(self)
     end

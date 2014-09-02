@@ -6,6 +6,7 @@ Spree::ProductsHelper.module_eval do
   end
 
   def get_neighbors_pins_coordinates(item)
+    item.set_default_neighbors_settings
     by_distance = item.neighbors_ids_by_distance
     by_choice = item.neighbors_ids_by_choice
     by_property = item.neighbors_ids_by_property

@@ -2,9 +2,8 @@ Spree::Admin::ProductsController.class_eval do
 
   def neighbors
     locatable = @product.location
-    default_options = {:location_id => locatable.id ,:radius => 0, :count => 0, :sort => 1}
-    default_neighbors_settins = Spree::NeighborsSettings.create(default_options)
-    @neighbors_settings = locatable.neighbors_settings = locatable.neighbors_settings || default_neighbors_settings
+    default_options = {:location_id => locatable.id ,:radius => 10, :count => 10, :sort => 1}
+    @neighbors_settings = locatable.neighbors_settings = (locatable.neighbors_settings || Spree::NeighborsSettings.create(default_options))
     neighbor_location_ids = Spree::Neighbors.where(neighbors_settings_id: @neighbors_settings.id).pluck(:location_id)
     locatables = Spree::Location.where(locatable_type: 'Spree::Product')
     locatables = locatables.includes(:locatable => :translations)

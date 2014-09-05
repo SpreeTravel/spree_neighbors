@@ -11,7 +11,7 @@
       <% products_neighbors(@product).each do |neighbor| %>
         <% css_class = cycle('even', 'odd') %>
         <tr class="<%= css_class %>">
-          <td><strong><%= link_to neighbor.try(:name), product_path(neighbor) %></strong></td>
+          <td><%= link_to neighbor.try(:name), product_path(neighbor) %></td>
           <td class="derecha"><%= format_distance @product.location.distance_from(neighbor.location) %></td>
         </tr>
       <% end %>

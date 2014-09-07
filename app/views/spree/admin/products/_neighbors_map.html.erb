@@ -5,18 +5,21 @@
       <%= neighbors_map(@product) %>
     <% end %>
 
-    <h6 class="product-section-title"><%= t(:interesting_places) %></h6>
-    <table id="product-neighbors" class="table-display" data-hook width="100%">
-      <tbody>
-      <% products_neighbors(@product).each do |neighbor| %>
-        <% css_class = cycle('even', 'odd') %>
-        <tr class="<%= css_class %>">
-          <td><%= link_to neighbor.try(:name), product_path(neighbor) %></td>
-          <td class="derecha"><%= format_distance @product.location.distance_from(neighbor.location) %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+    <% list = products_neighbors(@product) %>
+    <% if list.any? %>
+      <h6 class="product-section-title"><%= t(:interesting_places) %></h6>
+      <table id="product-neighbors" class="table-display" data-hook width="100%">
+        <tbody>
+        <% list.each do |neighbor| %>
+          <% css_class = cycle('even', 'odd') %>
+          <tr class="<%= css_class %>">
+            <td><%= link_to neighbor.try(:name), product_path(neighbor) %></td>
+            <td class="derecha"><%= format_distance @product.location.distance_from(neighbor.location) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
 
   </div>
 <%end%>

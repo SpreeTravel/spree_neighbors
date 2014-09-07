@@ -2,7 +2,7 @@
   <div data-hook="neighbors_map" id="neighbors_map">
     <h6 class="product-section-title"><%= t(:map) %></h6>
     <% cache [@product, :neighbors_map] do %>
-      <%= neighbors_map( @product) %>
+      <%= neighbors_map(@product) %>
     <% end %>
 
     <h6 class="product-section-title"><%= t(:interesting_places) %></h6>

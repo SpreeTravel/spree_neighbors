@@ -5,6 +5,7 @@ Spree::ProductsHelper.module_eval do
     location_item.locatable.name
   end
 
+  # TODO: optimizar este codigo que esta ineficiente
   def get_neighbors_pins_coordinates(item)
     item.set_default_neighbors_settings
     by_distance = item.neighbors_ids_by_distance
@@ -52,14 +53,14 @@ Spree::ProductsHelper.module_eval do
   end
 
   def products_neighbors(product)
-    products = []
+    products_ids = []
     unless product.location.nil?
       neighbors = get_neighbors_pins_coordinates(product.location)
       neighbors.each do |location|
-        products << Spree::Location.find(location[:locatable_id]).locatable
+        products_ids << Spree::Location.find(location[:locatable_id]).locatable_id
       end
     end
-    products
+    Spree::Product.where(:id => products_ids)
   end
 
   def format_distance(number)

@@ -13,7 +13,7 @@
         <% list.each do |neighbor| %>
           <% css_class = cycle('even', 'odd') %>
           <tr class="<%= css_class %>">
-            <td><%= link_to neighbor.try(:name), product_path(neighbor) %></td>
+            <td><%= link_to truncate(neighbor.try(:name), :length => 35), product_path(neighbor) %></td>
             <td class="derecha"><%= format_distance @product.location.distance_from(neighbor.location) %></td>
           </tr>
         <% end %>
